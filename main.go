@@ -19,6 +19,10 @@ func main() {
 	//sm := http.NewServeMux()
 
 	sm := mux.NewRouter()
+
+	getRouter := sm.Methods("GET").Subrouter()
+
+	getRouter.HandleFunc("/")
 	sm.Handle("/", ph)
 
 	s := &http.Server{Addr: ":9090", Handler: sm, IdleTimeout: 120 * time.Second, ReadTimeout: 1 * time.Second, WriteTimeout: 1 * time.Second}
